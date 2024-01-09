@@ -29,10 +29,10 @@ const productSlice = createSlice({
             state.products = action.payload
             state.productContainer = action.payload
         })
-        builder.addCase(fetchProducts.rejected,(state)=>{
+        builder.addCase(fetchProducts.rejected,(state,action)=>{
             state.loading = false
             state.products = []
-            state.error = "API call failed. Please Wait!!!"
+            state.error = `API call failed. `
         })
     }
 })

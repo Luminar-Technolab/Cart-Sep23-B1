@@ -20,9 +20,23 @@ const cartSlice = createSlice({
         },
         emptyCart:(state)=>{
             return state = []
+        },
+        incQuantity:(state,action)=>{
+            const existingProduct = state.find(item=>item.id==action.payload.id)
+            const newState = state.filter(item=>item.id!=existingProduct.id)
+            existingProduct.quantity++
+            existingProduct.totalPrice = existingProduct.quantity * existingProduct.price
+            state = ([...newState,existingProduct])
+        },
+        decQuantity:(state,action)=>{
+            const existingProduct = state.find(item=>item.id==action.payload.id)
+            const newState = state.filter(item=>item.id!=existingProduct.id)
+            existingProduct.quantity!=0&&existingProduct.quantity--
+            existingProduct.totalPrice = existingProduct.quantity * existingProduct.price
+            state = ([...newState,existingProduct])
         }
     }
 })
 
-export const {addtoCart,removeCart,emptyCart} = cartSlice.actions
+export const {addtoCart,removeCart,emptyCart,incQuantity,decQuantity} = cartSlice.actions
 export default cartSlice.reducer
