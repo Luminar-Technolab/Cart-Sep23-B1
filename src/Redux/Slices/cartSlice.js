@@ -31,7 +31,7 @@ const cartSlice = createSlice({
         decQuantity:(state,action)=>{
             const existingProduct = state.find(item=>item.id==action.payload.id)
             const newState = state.filter(item=>item.id!=existingProduct.id)
-            existingProduct.quantity!=0&&existingProduct.quantity--
+            existingProduct.quantity--
             existingProduct.totalPrice = existingProduct.quantity * existingProduct.price
             state = ([...newState,existingProduct])
         }
